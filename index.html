@@ -20,7 +20,7 @@
 </head>
 <body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
     
-    <!-- BOTÓN DE AJUSTES (Engranaje) -->
+    <!-- BOTÓN DE AJUSTES -->
     <button onclick="window.mostrarModal()" class="fixed top-6 right-6 z-[1000] bg-white p-3 rounded-full shadow-xl border border-amber-100 hover:scale-110 transition-all active:bg-amber-50">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
@@ -51,26 +51,26 @@
         <div class="px-8 pb-10">
             <!-- SOMMELIER -->
             <div class="mb-12">
-                <div class="flex justify-between items-end mb-4">
+                <div class="flex justify-between items-end mb-4 px-2">
                     <h2 class="text-xl font-bold section-title text-gray-800 italic">Conversa con el Sommelier</h2>
-                    <button onclick="window.preguntar('cuentame la historia de la vinificacion')" class="text-[9px] font-black uppercase tracking-widest text-amber-600 hover:text-amber-800 transition-colors">Vinificación →</button>
+                    <button id="btnVinificacion" class="text-[10px] font-black uppercase tracking-widest text-amber-600 hover:text-amber-800 transition-colors border-b border-amber-200 pb-0.5">La Vinificación ✨</button>
                 </div>
                 
                 <div id="box" class="hidden mb-6 p-6 bg-amber-50/60 rounded-2xl border border-amber-100 relative text-center shadow-inner">
                     <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-2 right-4 text-amber-200 hover:text-amber-600 text-xl font-light">&times;</button>
                     <div id="loading" class="text-[9px] font-black text-amber-700 loading-dots mb-2 tracking-[0.2em] uppercase italic">Inspirando...</div>
-                    <div id="texto" class="text-base leading-relaxed text-amber-950 italic font-medium"></div>
+                    <div id="texto" class="text-sm md:text-base leading-relaxed text-amber-950 italic font-medium"></div>
                 </div>
 
                 <div class="relative max-w-md mx-auto">
-                    <input type="text" id="query" class="w-full p-4 pr-12 rounded-xl border border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm text-sm" placeholder="Pregúntame, mi niño...">
+                    <input type="text" id="queryInput" class="w-full p-4 pr-12 rounded-xl border border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm text-sm" placeholder="Pregúntame, mi niño...">
                     <button id="btnEnviarPregunta" class="absolute right-2 top-2 bg-[#1a1a1a] text-white p-2.5 rounded-lg hover:bg-black transition-all shadow-md active:scale-90">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
                     </button>
                 </div>
             </div>
 
-            <!-- NOTAS DE CATA -->
+            <!-- NOTAS DE CATA (Cajas Crema) -->
             <div class="mb-14 grid grid-cols-1 gap-4">
                 <h2 class="text-xl font-bold mb-2 section-title text-gray-800 italic">Notas de Cata</h2>
                 
@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-            <!-- MARIDAJE CORREGIDO -->
+            <!-- MARIDAJE -->
             <div class="bg-[#fcfaf7] p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 opacity-10 text-6xl rotate-12">🍇</div>
                 <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic uppercase tracking-tighter">Maridaje: Armonía de Sabores</h2>
@@ -98,8 +98,8 @@
                     <div class="flex items-start gap-4">
                         <span class="text-2xl mt-1">🧀</span>
                         <div>
-                            <p class="text-sm font-bold text-gray-800 italic">Queso de Cabra Canario</p>
-                            <p class="text-xs text-gray-500 italic mt-1 leading-relaxed">De media curación, su acidez láctica se funde con el punto semiseco del vino.</p>
+                            <p class="text-sm font-bold text-gray-800 italic">Queso de cabrcanario</p>
+                            <p class="text-xs text-gray-500 italic mt-1 leading-relaxed">Su acidez láctica se funde con el punto semiseco del vino.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
@@ -124,8 +124,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
+        // Configuración Firebase
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -134,49 +135,48 @@
 
         let globalApiKey = "";
 
+        // Funciones de Ventana para que los botones funcionen siempre
         window.mostrarModal = () => document.getElementById('keyModal').classList.remove('hidden');
         window.cerrarModal = () => document.getElementById('keyModal').classList.add('hidden');
 
-        async function init() {
+        // Inicialización de datos y escucha de API Key
+        async function conectarBodega() {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                
+                await signInAnonymously(auth);
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
                 onSnapshot(docRef, (snap) => {
                     if (snap.exists()) {
                         globalApiKey = snap.data().apiKey;
                         document.getElementById('keyInput').value = globalApiKey;
+                        console.log("Llave detectada.");
                     } else {
                         window.mostrarModal();
                     }
                 }, () => window.mostrarModal());
             } catch (e) {
-                console.error(e);
+                console.error("Fallo de conexión:", e);
                 window.mostrarModal();
             }
         }
 
+        // Acción Guardar Clave
         document.getElementById('btnGuardarClave').onclick = async () => {
-            const val = document.getElementById('keyInput').value.trim();
-            if (val) {
-                if (!auth.currentUser) return;
+            const inputVal = document.getElementById('keyInput').value.trim();
+            if (inputVal) {
                 try {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
-                    await setDoc(docRef, { apiKey: val });
-                    globalApiKey = val;
+                    await setDoc(docRef, { apiKey: inputVal });
+                    globalApiKey = inputVal;
                     window.cerrarModal();
                 } catch (e) {
-                    console.error(e);
+                    alert("No pude guardar la llave, mi niño.");
                 }
             }
         };
 
-        window.preguntar = async (p) => {
-            if(!p || !globalApiKey) {
+        // El Sommelier responde
+        window.preguntar = async (mensaje) => {
+            if (!mensaje || !globalApiKey) {
                 if(!globalApiKey) window.mostrarModal();
                 return;
             }
@@ -184,7 +184,7 @@
             const box = document.getElementById('box');
             const texto = document.getElementById('texto');
             const loading = document.getElementById('loading');
-            
+
             box.classList.remove('hidden');
             loading.classList.remove('hidden');
             texto.innerText = "";
@@ -194,36 +194,43 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: `CONTEXTO: Eres un sommelier experto de Tenerife. VINO: Hécate (Listán Blanco, semiseco, 4 meses lías). VENDIMIA: 2025. ORIGEN: Las Dehesas, Valle de Güímar. MARIDAJE: Queso de cabra, higos, orejones, almendras y nueces. TAREA: Responde breve (máx 2 frases), poético y usa siempre 'mi niño'. Pregunta: ${p}` }] }]
+                        contents: [{ parts: [{ text: `CONTEXTO: Eres un sommelier experto de Tenerife. VINO: Hécate (Listán Blanco, semiseco, 4 meses lías). VENDIMIA: 2025 (Heroica, difícil, manual). ORIGEN: Las Dehesas, Valle de Güímar. MARIDAJE: Queso de cabra, higos, orejones, almendras y nueces. TAREA: Responde breve (máx 2 frases), poético y usa siempre 'mi niño'. Pregunta del usuario: ${mensaje}` }] }]
                     })
                 });
 
-                const result = await response.json();
+                const data = await response.json();
                 loading.classList.add('hidden');
                 
-                const textOutput = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (textOutput) {
-                    texto.innerText = textOutput;
+                const answer = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (answer) {
+                    texto.innerText = answer;
                 } else {
                     throw new Error();
                 }
             } catch (e) {
                 loading.classList.add('hidden');
-                texto.innerHTML = "¡Ay mi niño! Revisa la llave pulsando el engranaje.";
+                texto.innerHTML = "¡Ay mi niño! La llave de la cava no parece abrir bien. Revísala pulsando el engranaje arriba a la derecha.";
             }
         };
 
+        // Eventos de botones
         document.getElementById('btnEnviarPregunta').onclick = () => {
-            const q = document.getElementById('query').value;
+            const q = document.getElementById('queryInput').value;
             window.preguntar(q);
-            document.getElementById('query').value = "";
+            document.getElementById('queryInput').value = "";
         };
 
-        document.getElementById('query').onkeydown = (e) => {
-            if(e.key === 'Enter') document.getElementById('btnEnviarPregunta').click();
+        document.getElementById('queryInput').onkeydown = (e) => {
+            if (e.key === 'Enter') document.getElementById('btnEnviarPregunta').click();
         };
 
-        init();
+        // Botón Vinificación
+        document.getElementById('btnVinificacion').onclick = () => {
+            window.preguntar("Háblame de la vendimia heroica de 2025 y lo difícil que fue la fermentación de Hécate.");
+        };
+
+        // Arrancar
+        conectarBodega();
     </script>
 </body>
 </html>
