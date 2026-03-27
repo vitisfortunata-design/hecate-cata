@@ -14,106 +14,119 @@
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } }
         .section-title { position: relative; display: inline-block; }
         .section-title::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 40px; height: 2px; background: #c5a059; }
-        .cata-detail { border-left: 2px solid #f3f0ea; padding-left: 1.5rem; margin-bottom: 2rem; }
-        #keyModal { z-index: 9999; background: rgba(0,0,0,0.85); backdrop-filter: blur(6px); }
+        .bg-crema { background-color: #fdfbf7; border: 1px solid #f3eee5; }
+        #keyModal { z-index: 9999; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
     </style>
 </head>
 <body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
     
     <!-- BOTÓN DE AJUSTES (Engranaje) -->
-    <button onclick="window.mostrarModal()" class="fixed top-6 right-6 z-[1000] bg-white p-3 rounded-full shadow-xl border border-amber-100 hover:scale-110 transition-all">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+    <button onclick="window.mostrarModal()" class="fixed top-6 right-6 z-[1000] bg-white p-3 rounded-full shadow-xl border border-amber-100 hover:scale-110 transition-all active:bg-amber-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
     
     <!-- MODAL DE CONFIGURACIÓN -->
     <div id="keyModal" class="hidden fixed inset-0 flex items-center justify-center p-4">
         <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full shadow-2xl border-t-8 border-amber-600 text-center">
-            <h3 class="text-2xl font-bold mb-2 italic">Llave de la Cava</h3>
-            <p class="text-sm text-gray-500 mb-6">Pega tu API Key para activar al Sommelier en todos los dispositivos.</p>
-            <input type="password" id="keyInput" class="text-center w-full p-4 rounded-xl border-2 border-amber-50 mb-4 focus:border-amber-400 outline-none" placeholder="AIzaSy...">
+            <h3 class="text-2xl font-bold mb-2 italic text-gray-800">Llave de la Cava</h3>
+            <p class="text-sm text-gray-500 mb-6 leading-snug">Pega tu API Key para activar al Sommelier en todos los dispositivos.</p>
+            <input type="password" id="keyInput" class="text-center w-full p-4 rounded-xl border-2 border-amber-50 mb-4 focus:border-amber-400 outline-none transition-all" placeholder="AIzaSy...">
             <div class="flex flex-col gap-2">
-                <button id="btnGuardar" class="w-full bg-[#1a1a1a] text-white py-4 rounded-xl font-bold hover:bg-black transition-all shadow-lg active:scale-95">Activar para todos</button>
-                <button onclick="window.cerrarModal()" class="text-gray-400 text-xs font-bold uppercase py-2">Cerrar</button>
+                <button id="btnGuardarClave" class="w-full bg-[#1a1a1a] text-white py-4 rounded-xl font-bold hover:bg-black transition-all shadow-lg active:scale-95">Activar para todos</button>
+                <button onclick="window.cerrarModal()" class="text-gray-400 text-xs font-bold uppercase py-2 tracking-widest">Cerrar</button>
             </div>
         </div>
     </div>
 
-    <div class="max-w-2xl mx-auto wine-card rounded-[2.5rem] overflow-hidden mt-6 mb-12">
-        <header class="text-center pt-16 pb-12 px-8">
-            <div class="mb-4 opacity-40">
-                <small class="text-[10px] tracking-[0.5em] text-gray-600 font-bold uppercase italic">Vitis Fortunata</small>
+    <div class="max-w-2xl mx-auto wine-card rounded-[2.5rem] overflow-hidden mt-4 mb-12">
+        <!-- ENCABEZADO ORIGINAL -->
+        <header class="text-center pt-14 pb-10 px-8">
+            <div class="mb-3 opacity-50">
+                <small class="text-[10px] tracking-[0.5em] text-gray-500 font-bold uppercase italic">Vitis Fortunata</small>
             </div>
-            <h1 class="text-7xl font-bold text-[#1a1a1a] tracking-tighter uppercase">HÉCATE</h1>
-            <p class="text-[#c5a059] uppercase tracking-[0.3em] mt-4 italic text-[11px] font-black underline decoration-amber-200 underline-offset-4">Listán Blanco • Vendimia 2025</p>
+            <h1 class="text-6xl font-bold text-[#1a1a1a] tracking-tighter">HÉCATE</h1>
+            <p class="text-[#c5a059] uppercase tracking-[0.3em] mt-3 italic text-[11px] font-black underline decoration-amber-100 underline-offset-8">Listán Blanco • Las Dehesas 2025</p>
         </header>
 
-        <div class="px-8 pb-12">
-            <!-- CHAT DEL SOMMELIER -->
-            <div class="mb-16">
-                <h2 class="text-2xl font-bold mb-6 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
+        <div class="px-8 pb-10">
+            <!-- SOMMELIER (Pequeño y elegante) -->
+            <div class="mb-12">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl font-bold section-title text-gray-800 italic">Conversa con el Sommelier</h2>
+                    <button onclick="window.preguntar('cuentame la historia de la vinificacion')" class="text-[9px] font-black uppercase tracking-widest text-amber-600 hover:text-amber-800 transition-colors">Vinificación →</button>
+                </div>
                 
-                <div id="box" class="hidden mb-8 p-8 bg-amber-50/70 rounded-[2rem] border border-amber-100 relative text-center shadow-inner">
-                    <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-4 right-6 text-amber-300 hover:text-amber-900 text-3xl font-light">&times;</button>
-                    <div id="loading" class="text-[10px] font-black text-amber-700 loading-dots mb-3 tracking-widest uppercase italic">Inspirando el aroma...</div>
-                    <div id="texto" class="text-lg leading-relaxed text-amber-950 italic font-medium"></div>
+                <div id="box" class="hidden mb-6 p-6 bg-amber-50/60 rounded-2xl border border-amber-100 relative text-center shadow-inner">
+                    <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-2 right-4 text-amber-200 hover:text-amber-600 text-xl font-light">&times;</button>
+                    <div id="loading" class="text-[9px] font-black text-amber-700 loading-dots mb-2 tracking-[0.2em] uppercase italic">Inspirando...</div>
+                    <div id="texto" class="text-base leading-relaxed text-amber-950 italic font-medium"></div>
                 </div>
 
-                <div class="relative group">
-                    <input type="text" id="query" class="w-full p-6 pr-16 rounded-2xl border-2 border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm text-lg" placeholder="Pregúntame lo que quieras, mi niño...">
-                    <button id="btnPreguntar" class="absolute right-3 top-3 bg-[#1a1a1a] text-white p-4 rounded-xl hover:bg-black transition-all shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                <div class="relative max-w-md mx-auto">
+                    <input type="text" id="query" class="w-full p-4 pr-12 rounded-xl border border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm text-sm" placeholder="Pregúntame, mi niño...">
+                    <button id="btnEnviarPregunta" class="absolute right-2 top-2 bg-[#1a1a1a] text-white p-2.5 rounded-lg hover:bg-black transition-all shadow-md active:scale-90">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
                     </button>
                 </div>
             </div>
 
-            <!-- SECCIÓN: NOTAS DE CATA -->
-            <div class="mb-16">
-                <h2 class="text-2xl font-bold mb-10 section-title text-gray-800 italic">Notas de Cata</h2>
+            <!-- NOTAS DE CATA (Tono Crema) -->
+            <div class="mb-14 grid grid-cols-1 gap-4">
+                <h2 class="text-xl font-bold mb-2 section-title text-gray-800 italic">Notas de Cata</h2>
                 
-                <div class="cata-detail">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-amber-700 mb-2 italic">Fase Visual</h3>
-                    <p class="text-base text-gray-600 leading-relaxed italic">Amarillo pajizo brillante con reflejos acerados. Limpio y cristalino, denota juventud y pureza.</p>
+                <div class="bg-crema p-6 rounded-2xl">
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-2 italic">Fase Visual</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Amarillo pajizo brillante, reflejos acerados. Limpio y cristalino.</p>
                 </div>
 
-                <div class="cata-detail">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-amber-700 mb-2 italic">Fase Olfativa</h3>
-                    <p class="text-base text-gray-600 leading-relaxed italic">Nariz intensa de fruta blanca madura, notas cítricas y un elegante fondo de lías finas con mineralidad volcánica.</p>
+                <div class="bg-crema p-6 rounded-2xl">
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-2 italic">Fase Olfativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Fruta blanca madura y cítricos sobre un elegante fondo de lías finas y mineralidad volcánica.</p>
                 </div>
 
-                <div class="cata-detail">
-                    <h3 class="text-xs font-black uppercase tracking-widest text-amber-700 mb-2 italic text-pretty">Fase Gustativa</h3>
-                    <p class="text-base text-gray-600 leading-relaxed italic">Entrada amable y golosa característica de su punto semiseco. El paso por boca es sedoso gracias a las lías, con una acidez equilibrada que refresca el paladar.</p>
+                <div class="bg-crema p-6 rounded-2xl">
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-2 italic">Fase Gustativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Entrada golosa, paso sedoso y equilibrado. Postgusto largo con salinidad volcánica.</p>
                 </div>
             </div>
 
-            <!-- SECCIÓN: MARIDAJE -->
-            <div class="mb-12 bg-[#fcfaf7] p-8 rounded-[2rem] border border-gray-100 shadow-sm">
-                <h2 class="text-2xl font-bold mb-6 section-title text-gray-800 italic">Propuesta de Maridaje</h2>
-                <div class="flex items-start gap-4 mb-4">
-                    <span class="text-3xl">🧀</span>
-                    <div>
-                        <p class="text-sm font-bold text-gray-800 italic">Queso de Cabra Canario</p>
-                        <p class="text-xs text-gray-500 italic">Acompañado de higos pasados, orejones, almendras tostadas y nueces.</p>
+            <!-- MARIDAJE COMPLETO (Con Uva) -->
+            <div class="bg-[#fcfaf7] p-8 rounded-[2rem] border border-gray-100 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 opacity-10 text-6xl rotate-12">🍇</div>
+                <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic uppercase tracking-tighter">Armonía de Sabores</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <span class="text-2xl mt-1">🧀</span>
+                        <div>
+                            <p class="text-sm font-bold text-gray-800 italic">Queso de Cabra Canario</p>
+                            <p class="text-xs text-gray-500 italic mt-1 leading-relaxed">De media curación, su acidez láctica se funde con el punto semiseco del vino.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-2xl mt-1">🌰</span>
+                        <div>
+                            <p class="text-sm font-bold text-gray-800 italic">Frutos Secos y Desecados</p>
+                            <p class="text-xs text-gray-500 italic mt-1 leading-relaxed">Almendras tostadas, nueces, higos pasados y orejones. Potencian la untuosidad de las lías.</p>
+                        </div>
                     </div>
                 </div>
-                <p class="text-sm text-gray-600 italic leading-relaxed">
-                    La salinidad de Hécate armoniza con el queso, mientras que los frutos secos resaltan la untuosidad de las lías.
+                <p class="mt-8 pt-6 border-t border-amber-100 text-[11px] text-amber-800 italic font-medium leading-relaxed">
+                    "La salinidad de Hécate limpia el paladar, mientras que el azúcar residual abraza el dulzor natural del higo."
                 </p>
             </div>
         </div>
 
-        <footer class="py-12 text-center border-t border-gray-50 bg-[#fcfaf7]/30">
-            <p class="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">Las Dehesas • Valle de Güímar • Tenerife</p>
+        <footer class="py-10 text-center border-t border-gray-50 bg-[#fcfaf7]/40">
+            <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">Valle de Güímar • Tenerife</p>
         </footer>
     </div>
 
-    <!-- FIREBASE Y LÓGICA -->
+    <!-- FIREBASE Y LÓGICA ARREGLADA -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // Globales
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -122,53 +135,51 @@
 
         let globalApiKey = "";
 
-        // Funciones accesibles por ventana
+        // Funciones Globales
         window.mostrarModal = () => document.getElementById('keyModal').classList.remove('hidden');
         window.cerrarModal = () => document.getElementById('keyModal').classList.add('hidden');
 
-        // Inicialización de Datos
-        async function conectarBodega() {
+        // Inicialización
+        async function init() {
             try {
                 await signInAnonymously(auth);
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
-                
                 onSnapshot(docRef, (snap) => {
                     if (snap.exists()) {
                         globalApiKey = snap.data().apiKey;
                         document.getElementById('keyInput').value = globalApiKey;
-                        console.log("Llave detectada en la cava.");
+                        console.log("Llave cargada.");
                     } else {
                         window.mostrarModal();
                     }
-                }, (error) => {
-                    console.error("Error al leer:", error);
-                    window.mostrarModal();
-                });
+                }, () => window.mostrarModal());
             } catch (e) {
-                console.error("Error conexión:", e);
                 window.mostrarModal();
             }
         }
 
-        // Guardar Clave
-        document.getElementById('btnGuardar').onclick = async () => {
-            const input = document.getElementById('keyInput').value.trim();
-            if (input) {
+        // GUARDAR CLAVE (Arreglado)
+        document.getElementById('btnGuardarClave').onclick = async () => {
+            const val = document.getElementById('keyInput').value.trim();
+            if (val) {
                 try {
                     const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
-                    await setDoc(docRef, { apiKey: input });
-                    globalApiKey = input;
+                    await setDoc(docRef, { apiKey: val });
+                    globalApiKey = val;
                     window.cerrarModal();
-                    alert("¡Sommelier activado!");
+                    console.log("Llave guardada con éxito.");
                 } catch (e) {
-                    alert("No se pudo guardar la llave: " + e.message);
+                    alert("Error al guardar: " + e.message);
                 }
             }
         };
 
-        // Función de Chat
-        window.preguntarAlSommelier = async (p) => {
-            if(!p || !globalApiKey) return;
+        // PREGUNTAR (Arreglado)
+        window.preguntar = async (p) => {
+            if(!p || !globalApiKey) {
+                if(!globalApiKey) window.mostrarModal();
+                return;
+            }
 
             const box = document.getElementById('box');
             const texto = document.getElementById('texto');
@@ -183,7 +194,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: `CONTEXTO: Eres un sommelier amable de Tenerife. VINO: Hécate (Listán Blanco, semiseco, 4 meses lías). VENDIMIA: 2025. ORIGEN: Las Dehesas, Güímar. MARIDAJE: Queso de cabra canario, higos pasados, almendras, orejones, nueces. TAREA: Responde breve (máx 2 frases), poético y usa siempre 'mi niño'. Pregunta: ${p}` }] }]
+                        contents: [{ parts: [{ text: `CONTEXTO: Eres un sommelier experto de Tenerife. VINO: Hécate (Listán Blanco, semiseco, 4 meses lías). VENDIMIA: 2025 (Vendimia excepcional). ORIGEN: Las Dehesas, Valle de Güímar. MARIDAJE: Queso de cabra, higos, orejones, almendras y nueces. TAREA: Responde breve (máx 2 frases), muy poético y usa siempre 'mi niño'. Pregunta: ${p}` }] }]
                     })
                 });
 
@@ -193,27 +204,26 @@
                 if(result.candidates && result.candidates[0].content) {
                     texto.innerText = result.candidates[0].content.parts[0].text;
                 } else {
-                    throw new Error("Respuesta vacía");
+                    throw new Error("API Key inválida");
                 }
             } catch (e) {
                 loading.classList.add('hidden');
-                texto.innerHTML = "¡Ay mi niño! La llave no abre la bodega. Pulsa el engranaje arriba a la derecha y revísala.";
+                texto.innerHTML = "¡Ay mi niño! La llave de la cava no parece abrir bien. Pulsa el engranaje arriba a la derecha.";
             }
         };
 
-        // Enlace del botón de pregunta
-        document.getElementById('btnPreguntar').onclick = () => {
+        // Eventos de interfaz
+        document.getElementById('btnEnviarPregunta').onclick = () => {
             const q = document.getElementById('query').value;
-            window.preguntarAlSommelier(q);
+            window.preguntar(q);
             document.getElementById('query').value = "";
         };
 
-        // Enter para preguntar
-        document.getElementById('query').onkeypress = (e) => {
-            if(e.key === 'Enter') document.getElementById('btnPreguntar').click();
+        document.getElementById('query').onkeydown = (e) => {
+            if(e.key === 'Enter') document.getElementById('btnEnviarPregunta').click();
         };
 
-        conectarBodega();
+        init();
     </script>
 </body>
 </html>
