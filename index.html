@@ -14,81 +14,89 @@
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } }
         .section-title { position: relative; display: inline-block; }
         .section-title::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 40px; height: 2px; background: #c5a059; }
-        .modal-overlay { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 100; }
+        /* Forzar visibilidad del modal sobre todo lo demás */
+        #keyModal { z-index: 9999 !important; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); }
     </style>
 </head>
 <body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
     
-    <!-- BOTÓN DE AJUSTES (Engranaje) -->
-    <button id="btnConfig" class="fixed top-6 right-6 z-50 bg-white p-3 rounded-full shadow-xl border border-amber-100 hover:scale-110 transition-all">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+    <!-- BOTÓN DE AJUSTES (Engranaje) - Estilo inline para asegurar carga -->
+    <button onclick="window.mostrarModal()" class="fixed top-6 right-6 z-[10000] bg-white p-4 rounded-full shadow-2xl border border-amber-100 hover:scale-110 transition-all active:bg-amber-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
     
     <!-- MODAL DE CONFIGURACIÓN -->
-    <div id="keyModal" class="hidden fixed inset-0 flex items-center justify-center p-4 modal-overlay">
-        <div class="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl border-t-8 border-amber-600 text-center">
-            <h3 class="text-2xl font-bold mb-2 italic">Configurar IA</h3>
-            <p class="text-sm text-gray-500 mb-6">Pega aquí tu API Key de Google AI Studio para activar al Sommelier.</p>
-            <input type="password" id="keyInput" class="text-center w-full p-4 rounded-2xl border-2 border-amber-50 mb-4 focus:border-amber-400 outline-none transition-all" placeholder="AIzaSy...">
-            <div class="flex flex-col gap-3">
-                <button id="btnSave" class="w-full bg-[#1a1a1a] text-white py-4 rounded-2xl font-bold hover:bg-black transition-all shadow-lg">Activar Cava</button>
-                <button id="btnClose" class="text-gray-400 text-xs font-bold uppercase tracking-widest py-2">Cerrar</button>
+    <div id="keyModal" class="hidden fixed inset-0 flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-10 max-w-sm w-full shadow-2xl border-t-[12px] border-amber-600 text-center">
+            <h3 class="text-3xl font-bold mb-3 italic text-gray-800">Llave de Hécate</h3>
+            <p class="text-sm text-gray-500 mb-8 leading-relaxed">Para que la IA funcione en toda la bodega, pega tu API Key una sola vez.</p>
+            <input type="password" id="keyInput" class="text-center w-full p-5 rounded-2xl border-2 border-amber-50 mb-6 focus:border-amber-400 outline-none transition-all text-lg" placeholder="AIzaSy...">
+            <div class="flex flex-col gap-4">
+                <button onclick="window.guardarClaveCompartida()" class="w-full bg-[#1a1a1a] text-white py-5 rounded-2xl font-bold text-lg hover:bg-black transition-all shadow-xl active:scale-95">Activar para todos</button>
+                <button onclick="window.cerrarModal()" class="text-gray-400 text-xs font-bold uppercase tracking-[0.2em] py-2">Ahora no, gracias</button>
             </div>
         </div>
     </div>
 
-    <div class="max-w-2xl mx-auto wine-card rounded-3xl overflow-hidden mt-4">
-        <header class="text-center pt-12 pb-10 px-8">
-            <div class="mb-3 opacity-60">
-                <small class="text-[10px] tracking-[0.5em] text-gray-500 font-bold uppercase italic">Vitis Fortunata</small>
+    <div class="max-w-2xl mx-auto wine-card rounded-[2.5rem] overflow-hidden mt-6">
+        <header class="text-center pt-16 pb-12 px-8">
+            <div class="mb-4 opacity-50">
+                <small class="text-[11px] tracking-[0.6em] text-gray-600 font-bold uppercase italic underline decoration-amber-200 underline-offset-8">Vitis Fortunata</small>
             </div>
-            <h1 class="text-6xl font-bold text-[#1a1a1a]">HÉCATE</h1>
-            <p class="text-[#c5a059] uppercase tracking-[0.2em] mt-3 italic text-xs font-black">Listán Blanco • Güímar</p>
+            <h1 class="text-7xl font-bold text-[#1a1a1a] tracking-tighter">HÉCATE</h1>
+            <p class="text-[#c5a059] uppercase tracking-[0.3em] mt-4 italic text-[10px] font-black">Listán Blanco • Altura de Güímar</p>
         </header>
 
-        <div class="px-8 pb-10">
-            <!-- CHAT INTERACTIVO -->
-            <div class="mb-12">
-                <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
+        <div class="px-8 pb-12">
+            <div class="mb-14">
+                <h2 class="text-2xl font-bold mb-8 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
                 
-                <div id="box" class="hidden mb-6 p-6 bg-amber-50/60 rounded-3xl border border-amber-100 relative text-center shadow-inner">
-                    <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-2 right-4 text-amber-300 hover:text-amber-800 text-2xl">&times;</button>
-                    <div id="loading" class="text-[10px] font-black text-amber-700 loading-dots mb-3 tracking-widest uppercase italic">Destapando la botella...</div>
-                    <div id="texto" class="text-base leading-relaxed text-amber-950 italic font-medium"></div>
+                <div id="box" class="hidden mb-8 p-8 bg-amber-50/70 rounded-[2rem] border border-amber-100 relative text-center shadow-inner transition-all">
+                    <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-4 right-6 text-amber-300 hover:text-amber-900 text-3xl font-light">&times;</button>
+                    <div id="loading" class="text-[11px] font-black text-amber-700 loading-dots mb-4 tracking-[0.2em] uppercase italic">Consultando la añada...</div>
+                    <div id="texto" class="text-lg leading-relaxed text-amber-950 italic font-medium text-pretty"></div>
                 </div>
 
-                <div class="relative group">
-                    <input type="text" id="query" class="w-full p-5 pr-14 rounded-2xl border-2 border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm transition-all" placeholder="¿Qué quieres saber, mi niño?">
-                    <button id="btnAsk" class="absolute right-3 top-3 bg-[#1a1a1a] text-white p-3 rounded-xl hover:bg-black transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                <div class="relative">
+                    <input type="text" id="query" class="w-full p-6 pr-16 rounded-[1.5rem] border-2 border-gray-100 focus:border-amber-200 outline-none bg-white shadow-sm text-lg placeholder:text-gray-300 transition-all" placeholder="Pregúntame, mi niño...">
+                    <button onclick="window.ejecutarPregunta()" class="absolute right-3 top-3 bg-[#1a1a1a] text-white p-4 rounded-2xl hover:bg-black transition-all shadow-lg active:scale-90">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
                     </button>
                 </div>
-                <p class="text-[10px] text-gray-400 mt-3 text-center italic">Si el sommelier no responde, pulsa el engranaje arriba a la derecha.</p>
             </div>
 
-            <!-- INFO ESTÁTICA -->
-            <div class="space-y-8">
+            <!-- INFO ADICIONAL -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 opacity-80">
                 <div class="cata-detail">
-                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-2 italic">El Secreto</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed italic text-pretty">4 meses de crianza sobre lías finas en el Valle de Güímar.</p>
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-3 italic">La Crianza</h3>
+                    <p class="text-sm text-gray-600 italic">4 meses sobre lías que aportan una sedosidad única en el paladar.</p>
                 </div>
                 <div class="cata-detail">
-                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-2 italic">La Historia</h3>
-                    <button onclick="preguntar('cuentame la historia de la fermentacion')" class="text-sm text-amber-900 font-bold hover:underline italic text-left">Descubre la resiliencia de la añada 2023 →</button>
+                    <h3 class="text-[10px] font-black uppercase tracking-widest text-amber-700 mb-3 italic">La Historia</h3>
+                    <button onclick="window.preguntar('cuentame la historia de la fermentacion')" class="text-sm text-amber-900 font-bold hover:underline italic">Resiliencia 2023 →</button>
                 </div>
             </div>
         </div>
 
-        <footer class="py-10 text-center border-t border-gray-50">
-            <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">Vitis Fortunata • Las Dehesas</p>
+        <footer class="py-12 text-center border-t border-gray-50 bg-[#fcfaf7]/50">
+            <p class="text-[10px] font-bold uppercase tracking-[0.6em] text-gray-300 italic">Valle de Güímar • Tenerife</p>
         </footer>
     </div>
 
+    <!-- Firebase y Lógica -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
+        // Funciones Globales para los botones
+        window.mostrarModal = () => {
+            console.log("Abriendo modal...");
+            document.getElementById('keyModal').classList.remove('hidden');
+        };
+        window.cerrarModal = () => document.getElementById('keyModal').classList.add('hidden');
+
+        // Configuración inyectada
         const firebaseConfig = JSON.parse(__firebase_config);
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -97,12 +105,8 @@
 
         let globalApiKey = "";
 
-        // Hacer funciones accesibles desde el HTML
-        window.mostrarModal = () => document.getElementById('keyModal').classList.remove('hidden');
-        window.cerrarModal = () => document.getElementById('keyModal').classList.add('hidden');
-
-        // Inicialización
-        async function init() {
+        // Sincronización con la nube
+        async function conectarCava() {
             try {
                 await signInAnonymously(auth);
                 const keyDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
@@ -111,28 +115,34 @@
                     if (snap.exists()) {
                         globalApiKey = snap.data().apiKey;
                         document.getElementById('keyInput').value = globalApiKey;
+                        console.log("Cava conectada.");
                     } else {
-                        window.mostrarModal(); // Si no hay clave en la nube, la pedimos
+                        window.mostrarModal();
                     }
+                }, (err) => {
+                    console.error("Error Firebase:", err);
+                    window.mostrarModal();
                 });
             } catch (e) {
-                console.error("Error de conexión", e);
+                console.error("Error Inicio:", e);
+                window.mostrarModal();
             }
         }
 
-        // Guardar clave
         window.guardarClaveCompartida = async () => {
             const input = document.getElementById('keyInput').value.trim();
             if (input) {
-                const keyDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
-                await setDoc(keyDocRef, { apiKey: input });
-                globalApiKey = input;
-                window.cerrarModal();
-                alert("¡Cava sincronizada!");
+                try {
+                    const keyDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'config');
+                    await setDoc(keyDocRef, { apiKey: input });
+                    globalApiKey = input;
+                    window.cerrarModal();
+                } catch (e) {
+                    alert("Error guardando: " + e.message);
+                }
             }
         };
 
-        // Preguntar
         window.preguntar = async (p) => {
             if(!p) return;
             if(!globalApiKey) { window.mostrarModal(); return; }
@@ -150,34 +160,31 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: `ERES: Sommelier amable de Güímar, Tenerife. VINO: Hécate (semiseco). HISTORIA: Calor extremo en oct-2023, parada de fermentación y refermentación heroica. TAREA: Responde breve (2 frases máx), poético y usa 'mi niño'. Pregunta: ${p}` }] }]
+                        contents: [{ parts: [{ text: `ERES: Sommelier experto de Tenerife. VINO: Hécate (semiseco). HISTORIA: Fermentación detenida por calor en 2023. TAREA: Responde en 2 frases cortas, poéticas y usa 'mi niño'. Pregunta: ${p}` }] }]
                     })
                 });
 
                 const result = await response.json();
                 loading.classList.add('hidden');
                 
-                if(result.candidates) {
+                if(result.candidates && result.candidates[0].content) {
                     texto.innerText = result.candidates[0].content.parts[0].text;
                 } else {
-                    throw new Error("Clave inválida");
+                    throw new Error("API Key inválida");
                 }
             } catch (e) {
                 loading.classList.add('hidden');
-                texto.innerHTML = "¡Ay mi niño! La llave de la cava no parece ser la correcta. <br><button onclick='window.mostrarModal()' class='mt-2 font-black uppercase text-[10px] text-amber-800 underline'>Revisar Clave</button>";
+                texto.innerHTML = "¡Ay mi niño! La llave de la cava no parece abrir bien. <br><button onclick='window.mostrarModal()' class='mt-4 font-black uppercase text-xs text-amber-800 underline tracking-widest'>Revisar Llave</button>";
             }
         };
 
-        // Event Listeners para los botones (ya que son módulos)
-        document.getElementById('btnConfig').addEventListener('click', window.mostrarModal);
-        document.getElementById('btnClose').addEventListener('click', window.cerrarModal);
-        document.getElementById('btnSave').addEventListener('click', window.guardarClaveCompartida);
-        document.getElementById('btnAsk').addEventListener('click', () => {
+        window.ejecutarPregunta = () => {
             const q = document.getElementById('query').value;
             window.preguntar(q);
-        });
+        };
 
-        init();
+        // Iniciar todo
+        conectarCava();
     </script>
 </body>
 </html>
