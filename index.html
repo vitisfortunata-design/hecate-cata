@@ -20,17 +20,17 @@
 <body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
     <div class="max-w-2xl mx-auto wine-card rounded-3xl overflow-hidden">
         
-        <!-- ENCABEZADO ACTUALIZADO -->
-        <header class="text-center pt-12 pb-10 px-8">
+        <!-- ENCABEZADO CORREGIDO -->
+        <header class="text-center pt-12 pb-12 px-8">
             <div class="mb-3 opacity-80">
                 <small class="text-[10px] tracking-[0.4em] text-gray-400 font-bold uppercase italic">Vitis Fortunata</small>
             </div>
-            <h1 class="text-6xl font-bold text-[#1a1a1a]">HÉCATE</h1>
+            <h1 class="text-5xl md:text-6xl font-bold text-[#1a1a1a]">HÉCATE</h1>
             <p class="text-[#c5a059] uppercase tracking-widest mt-3 italic text-sm font-bold">Listán Blanco - Las Dehesas, Güímar</p>
         </header>
 
         <div class="px-8 pb-10">
-            <!-- SECCIÓN INTERACTIVA -->
+            <!-- BLOQUE DE INTERACCIÓN (SOMMELIER) -->
             <div class="mb-12">
                 <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
@@ -59,20 +59,40 @@
                 </div>
             </div>
 
-            <!-- NOTAS DE CATA -->
+            <!-- NOTAS DE CATA (MANTENIDAS) -->
             <div class="mb-12">
                 <h2 class="text-xl font-bold mb-8 section-title text-gray-800 italic">Notas de Cata</h2>
-                <div class="cata-detail"><h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Visual</h3><p class="text-sm text-gray-600 italic">Amarillo pajizo pálido, brillante y limpio.</p></div>
-                <div class="cata-detail"><h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Olfativa</h3><p class="text-sm text-gray-600 italic">Fruta blanca madura y un fondo mineral volcánico con notas de panadería por sus 4 meses de lías.</p></div>
-                <div class="cata-detail"><h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Gustativa</h3><p class="text-sm text-gray-600 italic">Entrada golosa, sedosa y equilibrada. La acidez vibrante compensa su carácter semiseco.</p></div>
+                
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Visual</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Presenta un color amarillo pajizo pálido con reflejos verdosos, muy limpio y brillante, que denota su frescura y juventud a pesar de su paso por lías.</p>
+                </div>
+
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Olfativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">En nariz destaca por su intensidad y elegancia. Notas de fruta blanca madura (pera, manzana) se mezclan con sutiles matices herbáceos y un fondo mineral volcánico muy característico. Los 4 meses de lías aportan una cremosidad aromática que recuerda a la bollería fina.</p>
+                </div>
+
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Gustativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Entrada amable y golosa gracias a su carácter semiseco. En boca es amplio, sedoso y con un volumen notable fruto de su crianza. El equilibrio entre el dulzor residual y la acidez vibrante es perfecto, dejando un postgusto largo, salino y muy refrescante.</p>
+                </div>
             </div>
 
-            <!-- MARIDAJE ELEGIDO SIN ASTERISCOS -->
+            <!-- SUGERENCIA DE LA CASA (DISEÑO ORIGINAL RECUPERADO SIN *) -->
             <div class="bg-[#fcfaf7] p-8 rounded-3xl border border-gray-100 shadow-sm">
-                <h2 class="text-lg font-bold mb-6 section-title text-gray-800 italic">Armonía Canaria</h2>
-                <p class="text-sm text-gray-600 italic leading-relaxed">
-                    Maridaje estrella: Queso de cabra de media curación, higos pasados, orejones, nueces y almendras. Un equilibrio perfecto entre salinidad, dulzor y textura.
-                </p>
+                <h2 class="text-lg font-bold mb-6 section-title text-gray-800 italic">Sugerencia de la Casa</h2>
+                <div class="flex items-start gap-5">
+                    <div class="text-4xl">🍇</div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-800 mb-2">Armonía Canaria</p>
+                        <p class="text-sm text-gray-600 leading-relaxed italic">
+                            Acompáñalo con queso de cabra canario de media curación, higos pasados, orejones, nueces y almendras tostadas. 
+                            <span class="block mt-2 text-amber-800 font-medium italic">¿Por qué funciona?</span>
+                            La salinidad volcánica de Hécate corta la grasa del queso, mientras que los frutos secos y deshidratados potencian la sedosidad que las lías han dejado en el vino tras esa fermentación tan especial.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
