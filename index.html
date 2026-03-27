@@ -20,7 +20,7 @@
 <body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
     <div class="max-w-2xl mx-auto wine-card rounded-3xl overflow-hidden">
         
-        <!-- ENCABEZADO CORREGIDO -->
+        <!-- ENCABEZADO -->
         <header class="text-center pt-12 pb-12 px-8">
             <div class="mb-3 opacity-80">
                 <small class="text-[10px] tracking-[0.4em] text-gray-400 font-bold uppercase italic">Vitis Fortunata</small>
@@ -33,14 +33,11 @@
             <!-- BLOQUE DE INTERACCIÓN (SOMMELIER) -->
             <div class="mb-12">
                 <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                    <button onclick="preguntar('historia')" class="text-left p-4 rounded-xl border border-gray-100 bg-white hover:bg-amber-50 transition-all group shadow-sm">
+                <div class="mb-4">
+                    <!-- Solo queda el botón de la historia técnica -->
+                    <button onclick="preguntar('historia')" class="w-full text-left p-4 rounded-xl border border-gray-100 bg-white hover:bg-amber-50 transition-all group shadow-sm">
                         <span class="block text-[9px] font-bold text-amber-600 uppercase mb-1 tracking-tighter">La Elaboración ✨</span>
-                        <span class="text-sm font-medium italic group-hover:text-amber-900 leading-tight">¿Qué pasó en la fermentación?</span>
-                    </button>
-                    <button onclick="preguntar('maridaje')" class="text-left p-4 rounded-xl border border-gray-100 bg-white hover:bg-amber-50 transition-all group shadow-sm">
-                        <span class="block text-[9px] font-bold text-amber-600 uppercase mb-1 tracking-tighter">Tu Propuesta ✨</span>
-                        <span class="text-sm font-medium italic group-hover:text-amber-900 leading-tight">¿Con qué lo bebemos hoy?</span>
+                        <span class="text-sm font-medium italic group-hover:text-amber-900 leading-tight">¿Qué pasó en la fermentación? Descubre la historia real.</span>
                     </button>
                 </div>
 
@@ -59,7 +56,7 @@
                 </div>
             </div>
 
-            <!-- NOTAS DE CATA (MANTENIDAS) -->
+            <!-- NOTAS DE CATA -->
             <div class="mb-12">
                 <h2 class="text-xl font-bold mb-8 section-title text-gray-800 italic">Notas de Cata</h2>
                 
@@ -79,7 +76,7 @@
                 </div>
             </div>
 
-            <!-- SUGERENCIA DE LA CASA (DISEÑO ORIGINAL RECUPERADO SIN *) -->
+            <!-- SUGERENCIA DE LA CASA -->
             <div class="bg-[#fcfaf7] p-8 rounded-3xl border border-gray-100 shadow-sm">
                 <h2 class="text-lg font-bold mb-6 section-title text-gray-800 italic">Sugerencia de la Casa</h2>
                 <div class="flex items-start gap-5">
