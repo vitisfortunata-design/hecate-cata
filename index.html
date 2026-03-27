@@ -50,6 +50,41 @@
                 </div>
             </div>
 
+            <!-- MARIDAJE RECUPERADO (ICONOS Y TEXTO ORIGINAL) -->
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic text-center md:text-left">Maridaje: Armonía de sabores</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-amber-50/40 p-5 rounded-2xl flex items-center gap-4 border border-amber-100/50">
+                        <span class="text-3xl">🧀</span>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-amber-800 tracking-tighter">Queso de Cabra</p>
+                            <p class="text-xs text-gray-600 italic">Media curación canaria para equilibrar la acidez.</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50/40 p-5 rounded-2xl flex items-center gap-4 border border-amber-100/50">
+                        <span class="text-3xl">🌰</span>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-amber-800 tracking-tighter">Frutos Secos</p>
+                            <p class="text-xs text-gray-600 italic">Almendras y nueces que resaltan las lías.</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50/40 p-5 rounded-2xl flex items-center gap-4 border border-amber-100/50">
+                        <span class="text-3xl">🍑</span>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-amber-800 tracking-tighter">Fruta Desecada</p>
+                            <p class="text-xs text-gray-600 italic">Orejones e higos que abrazan el punto semiseco.</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50/40 p-5 rounded-2xl flex items-center gap-4 border border-amber-100/50">
+                        <span class="text-3xl">🌊</span>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase text-amber-800 tracking-tighter">Final Salino</p>
+                            <p class="text-xs text-gray-600 italic">Mineralidad volcánica que limpia el paladar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- NOTAS DE CATA -->
             <div class="mb-14 space-y-4">
                 <h2 class="text-xl font-bold mb-2 section-title text-gray-800 italic">Notas de Cata</h2>
@@ -70,18 +105,15 @@
     </div>
 
     <script>
-        /**
-         * CLAVE FRAGMENTADA (NUEVA VERSIÓN)
-         * Se reconstruye solo al llamar a la función para evitar detección por bots.
-         */
-        const _p1 = "AIzaSyBgQPoHyB";
-        const _p2 = "EBwe0JyWWHX6i";
-        const _p3 = "6N7fyW_q30U4";
+        // Clave API reconstruida exactamente como me la pasaste
+        const p1 = "AIzaSyBgQPoHyB";
+        const p2 = "EBwe0JyWWHX6i";
+        const p3 = "6N7fyW_q30U4";
         
-        const getVault = () => _p1 + _p2 + _p3;
+        const getVaultKey = () => p1 + p2 + p3;
 
         async function preguntarSommelier(q) {
-            const vaultKey = getVault();
+            const vault = getVaultKey();
             const chatBox = document.getElementById('chatBox');
             const texto = document.getElementById('textoRespuesta');
             const load = document.getElementById('loading');
@@ -91,14 +123,13 @@
             texto.innerText = "";
 
             try {
-                // Modelo Gemini 2.5 Flash
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${vaultKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${vault}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ 
                             parts: [{ 
-                                text: `Eres un sommelier experto (hombre) de Tenerife. Tono: docto, elegante, canario y muy amable. VINO: Hécate (Listán Blanco 2025, Las Dehesas, semiseco, 4 meses lías). Responde de forma poética y muy breve (máximo 2 frases). Dirígete a la usuaria siempre como 'mi niña'. Pregunta: ${q}` 
+                                text: `Eres un SOMMELIER EXPERTO (HOMBRE) de Tenerife. Tono: Docto, elegante, canario y muy amable. VINO: Hécate (Listán Blanco 2025, Las Dehesas, semiseco, 4 meses lías). MARIDAJE: Queso de cabra, frutos secos, higos y orejones. Responde poético, breve (máx 2 frases) y dirígete a la usuaria como 'mi niña'. Pregunta: ${q}` 
                             }] 
                         }]
                     })
@@ -110,16 +141,15 @@
                 if (data.candidates && data.candidates[0].content) {
                     texto.innerText = data.candidates[0].content.parts[0].text;
                 } else {
-                    texto.innerText = "¡Ay mi niña! El aroma de este Listán me ha dejado sin palabras por un segundo. Prueba a preguntarme otra vez.";
+                    texto.innerText = "¡Ay mi niña! El aroma de este Listán me ha dejado sin palabras por un segundo. Prueba de nuevo.";
                 }
             } catch (e) {
                 load.classList.add('hidden');
-                texto.innerText = "¡Ay mi niña! Hubo un problema con la llave de la cava. ¿La revisamos?";
+                texto.innerText = "¡Ay mi niña! Hubo un problema al descorchar la respuesta. ¿Revisamos la llave?";
                 console.error("Error:", e);
             }
         }
 
-        // Interacciones de la Interfaz
         document.getElementById('btnEnviar').onclick = () => {
             const val = document.getElementById('userInput').value.trim();
             if (val) {
