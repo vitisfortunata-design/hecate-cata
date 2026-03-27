@@ -5,151 +5,246 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hécate - Sommelier Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Lato', sans-serif; background-color: #fcfaf7; color: #2d2d2d; }
+        body { font-family: 'Lato', sans-serif; background-color: #fdfbf8; color: #2d2d2d; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .wine-card { background: white; border-radius: 3rem; box-shadow: 0 20px 50px rgba(0,0,0,0.04); }
-        .section-card { background-color: #fdfbf8; border-radius: 1.5rem; transition: transform 0.3s ease; }
-        .loading-dots:after { content: '.'; animation: dots 1.5s infinite; }
+        
+        .main-container {
+            max-width: 450px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 4rem;
+            box-shadow: 0 10px 60px rgba(0,0,0,0.03);
+            min-height: 100vh;
+        }
+
+        .section-card {
+            background-color: #fefcf9;
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .label-style {
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #d4a373;
+            font-style: italic;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .content-style {
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .harmony-box {
+            background-color: #fefcf9;
+            border-radius: 3rem;
+            padding: 2.5rem;
+            position: relative;
+            margin-top: 3rem;
+        }
+
+        .grape-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .title-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #d4a373;
+        }
+
+        /* Estilos del Chat */
+        .chat-response {
+            background: #fff9f2;
+            border: 1px solid #f3e9dc;
+            border-radius: 1.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: #5d4037;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .loading-dots:after {
+            content: '.';
+            animation: dots 1.5s infinite;
+        }
         @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } }
-        .section-title { position: relative; display: inline-block; font-style: italic; font-size: 1.5rem; margin-bottom: 1.5rem; }
-        .section-title::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 35px; height: 2px; background: #c5a059; }
-        .harmony-box { background-color: #fdfbf8; border-radius: 2.5rem; position: relative; overflow: hidden; }
-        .grape-bg { position: absolute; top: 0; right: 0; opacity: 0.05; width: 100px; pointer-events: none; }
     </style>
 </head>
-<body class="p-4 md:p-10 bg-[#f8f5f0] min-h-screen">
+<body class="bg-[#f8f5f0] py-10 px-4">
 
-    <div class="max-w-xl mx-auto wine-card overflow-hidden pb-12">
-        <!-- CABECERA -->
-        <header class="text-center pt-16 pb-12 px-8">
-            <h1 class="text-3xl font-bold text-[#1a1a1a] section-title italic">Notas de Cata</h1>
+    <div class="main-container overflow-hidden pb-20">
+        
+        <!-- HEADER SEGÚN CAPTURA -->
+        <header class="text-center pt-20 pb-16 px-10">
+            <p class="text-[10px] tracking-[0.5em] text-gray-400 font-bold uppercase mb-4 italic">Vitis Fortunata</p>
+            <h1 class="text-6xl font-bold tracking-tighter mb-2">HÉCATE</h1>
+            <p class="text-[#d4a373] text-[11px] font-black tracking-[0.3em] uppercase italic underline decoration-amber-100 underline-offset-8">Listán Blanco • Las Dehesas 2025</p>
         </header>
 
-        <div class="px-8 space-y-6">
-            <!-- BLOQUES DE CATA (ESTILO IMAGEN) -->
-            <div class="section-card p-8">
-                <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#c5a059] mb-3 italic">Fase Visual</h3>
-                <p class="text-sm text-gray-600 italic leading-relaxed">Amarillo pajizo brillante, reflejos acerados. Limpio y cristalino.</p>
-            </div>
+        <div class="px-8">
+            
+            <!-- CONVERSA CON EL SOMMELIER -->
+            <section class="mb-16">
+                <div class="flex justify-between items-end mb-6">
+                    <h2 class="text-2xl font-bold italic title-underline">Conversa con el Sommelier</h2>
+                    <button onclick="preguntar('Háblame de la vinificación')" class="text-[9px] font-black text-[#d4a373] uppercase tracking-widest border-b border-amber-100 pb-1 hover:text-amber-800 transition-colors">Vinificación</button>
+                </div>
 
-            <div class="section-card p-8">
-                <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#c5a059] mb-3 italic">Fase Olfativa</h3>
-                <p class="text-sm text-gray-600 italic leading-relaxed">Fruta blanca madura y cítricos sobre un elegante fondo de lías finas y mineralidad volcánica.</p>
-            </div>
-
-            <div class="section-card p-8">
-                <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#c5a059] mb-3 italic">Fase Gustativa</h3>
-                <p class="text-sm text-gray-600 italic leading-relaxed">Entrada golosa, paso sedoso y equilibrado. Postgusto largo con salinidad volcánica.</p>
-            </div>
-
-            <!-- BLOQUE SOMMELIER (INTERACTIVO) -->
-            <div class="mt-12 mb-12">
-                <div id="chatBox" class="hidden mb-6 p-6 bg-amber-50/60 rounded-2xl border border-amber-100 relative text-center">
-                    <button onclick="document.getElementById('chatBox').classList.add('hidden')" class="absolute top-2 right-4 text-amber-300 hover:text-amber-600 text-xl">&times;</button>
-                    <div id="loading" class="hidden text-[9px] font-black text-amber-700 loading-dots mb-2 tracking-[0.2em] uppercase italic">Escuchando el vino...</div>
-                    <div id="textoRespuesta" class="text-sm md:text-base leading-relaxed text-amber-950 italic font-medium"></div>
+                <div id="chatDisplay" class="hidden">
+                    <div id="loading" class="text-center mb-4">
+                        <span class="text-[9px] font-black uppercase tracking-widest text-amber-600 loading-dots italic">Inspirando aroma</span>
+                    </div>
+                    <div id="responseBox" class="chat-response"></div>
                 </div>
 
                 <div class="relative">
-                    <input type="text" id="userInput" class="w-full p-4 pr-12 rounded-2xl border border-gray-100 focus:border-amber-200 outline-none bg-[#fdfbf8] shadow-inner text-sm italic" placeholder="Pregúntame, mi niña...">
-                    <button id="btnEnviar" class="absolute right-3 top-2.5 bg-[#1a1a1a] text-white p-2 rounded-xl hover:bg-black transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                    <input type="text" id="userInput" 
+                        class="w-full bg-[#fefcf9] p-4 pr-14 rounded-2xl outline-none text-sm italic border border-transparent focus:border-amber-100 shadow-inner" 
+                        placeholder="Pregúntame, mi niño...">
+                    <button onclick="handleSend()" class="absolute right-2 top-2 bg-[#1a1a1a] text-white p-2.5 rounded-xl hover:bg-black transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
                     </button>
                 </div>
-            </div>
+            </section>
 
-            <!-- ARMONÍA DE SABORES (REPLICA EXACTA DE IMAGEN) -->
-            <div class="harmony-box p-10 mt-16 relative">
-                <div class="grape-bg text-6xl">🍇</div>
-                <h2 class="text-2xl font-bold mb-10 italic uppercase tracking-tighter text-[#1a1a1a]">Armonía de Sabores</h2>
+            <!-- NOTAS DE CATA -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-bold italic title-underline mb-10">Notas de Cata</h2>
                 
-                <div class="space-y-8">
-                    <div class="flex items-start gap-5">
-                        <span class="text-4xl">🧀</span>
+                <div class="section-card">
+                    <span class="label-style">Fase Visual</span>
+                    <p class="content-style">Amarillo pajizo brillante, reflejos acerados. Limpio y cristalino.</p>
+                </div>
+
+                <div class="section-card">
+                    <span class="label-style">Fase Olfativa</span>
+                    <p class="content-style">Fruta blanca madura sobre un elegante fondo de lías finas y mineralidad volcánica.</p>
+                </div>
+
+                <div class="section-card">
+                    <span class="label-style">Fase Gustativa</span>
+                    <p class="content-style">Entrada golosa, paso sedoso y equilibrado. Postgusto largo con salinidad volcánica.</p>
+                </div>
+            </section>
+
+            <!-- ARMONÍA DE SABORES -->
+            <section class="harmony-box">
+                <div class="grape-icon">🍇</div>
+                <h2 class="text-2xl font-bold italic title-underline mb-12">Armonía de Sabores</h2>
+                
+                <div class="space-y-10">
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl mt-1">🧀</span>
                         <div>
-                            <p class="text-sm font-bold text-gray-800 italic mb-1">Queso de Cabra Canario</p>
-                            <p class="text-xs text-gray-500 italic leading-relaxed">De media curación, su acidez láctica se funde con el punto semiseco del vino.</p>
+                            <h4 class="text-[13px] font-bold italic text-gray-800 mb-1">Queso de Cabra Canario</h4>
+                            <p class="text-[12px] text-gray-500 italic leading-relaxed">De media curación, su acidez láctica se funde con el punto semiseco del vino.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-5">
-                        <span class="text-4xl">🌰</span>
+                    <div class="flex items-start gap-4">
+                        <span class="text-3xl mt-1">🌰</span>
                         <div>
-                            <p class="text-sm font-bold text-gray-800 italic mb-1">Frutos Secos y Desecados</p>
-                            <p class="text-xs text-gray-500 italic leading-relaxed">Almendras tostadas, nueces, higos pasados y orejones. Potencian la untuosidad de las lías.</p>
+                            <h4 class="text-[13px] font-bold italic text-gray-800 mb-1">Frutos Secos y Desecados</h4>
+                            <p class="text-[12px] text-gray-500 italic leading-relaxed">Almendras tostadas, nueces, higos pasados y orejones. Potencian la untuosidad de las lías.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-12 pt-8 border-t border-amber-100/50">
-                    <p class="text-[13px] text-amber-800 italic leading-relaxed text-center font-medium">
-                        "La salinidad de Hécate limpia el paladar, mientras que el azúcar residual abraza el dulzor natural del higo."
+                <div class="mt-12 pt-8 border-t border-amber-100/40 text-center">
+                    <p class="text-[12px] text-[#8b5e34] italic leading-relaxed px-2 font-medium">
+                        "La acidez de Hécate limpia el paladar, mientras que el azúcar residual abraza el dulzor natural del higo."
                     </p>
                 </div>
-            </div>
+            </section>
+
         </div>
 
-        <footer class="mt-16 text-center">
-            <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-gray-300 italic">Valle de Güímar • Tenerife</p>
+        <footer class="mt-20 text-center pb-10">
+            <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">Valle de Güímar • Tenerife</p>
         </footer>
     </div>
 
     <script>
-        // Clave API restaurada y verificada
-        const _k1 = "AIzaSyBgQPoHyB";
-        const _k2 = "EBwe0JyWWHX6i";
-        const _k3 = "6N7fyW_q30U4";
-        const getVault = () => _k1 + _k2 + _k3;
+        // Clave API restaurada (ensamblada correctamente)
+        const K_P1 = "AIzaSyBgQPoHyB";
+        const K_P2 = "EBwe0JyWWHX6i";
+        const K_P3 = "6N7fyW_q30U4";
+        const VAULT_KEY = () => K_P1 + K_P2 + K_P3;
 
-        async function preguntarSommelier(q) {
-            const vaultKey = getVault();
-            const chatBox = document.getElementById('chatBox');
-            const texto = document.getElementById('textoRespuesta');
-            const load = document.getElementById('loading');
+        async function preguntar(q) {
+            const display = document.getElementById('chatDisplay');
+            const box = document.getElementById('responseBox');
+            const loading = document.getElementById('loading');
             
-            chatBox.classList.remove('hidden');
-            load.classList.remove('hidden');
-            texto.innerText = "";
+            display.classList.remove('hidden');
+            loading.classList.remove('hidden');
+            box.innerText = "";
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${vaultKey}`, {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${VAULT_KEY()}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ 
                             parts: [{ 
-                                text: `Eres un sommelier canario experto (hombre). Tono: elegante, docto, amable. VINO: Hécate (Listán Blanco 2025, Las Dehesas, semiseco). MARIDAJE: Queso de cabra, frutos secos, higos y orejones. Responde muy breve (máx 2 frases) y dirígete a la usuaria como 'mi niña'. Pregunta: ${q}` 
+                                text: `Eres un sommelier experto (hombre) de Tenerife. Hablas de Hécate (Listán Blanco, semiseco, Las Dehesas, 2025). Tono: docto, amable, canario. Responde muy breve (máx 2 frases) y dirígete a la usuaria como 'mi niña'. Pregunta: ${q}` 
                             }] 
                         }]
                     })
                 });
 
                 const data = await response.json();
-                load.classList.add('hidden');
+                loading.classList.add('hidden');
                 
                 if (data.candidates && data.candidates[0].content) {
-                    texto.innerText = data.candidates[0].content.parts[0].text;
+                    box.innerText = data.candidates[0].content.parts[0].text;
                 } else {
-                    texto.innerText = "¡Ay mi niña! El vino me ha dejado sin palabras por un segundo. Prueba otra vez.";
+                    box.innerText = "¡Ay mi niño! El aroma del vino me ha dejado sin palabras por un segundo. Prueba de nuevo.";
                 }
             } catch (e) {
-                load.classList.add('hidden');
-                texto.innerText = "¡Ay mi niña! Hubo un problema con la llave de la cava. ¿La revisamos?";
+                loading.classList.add('hidden');
+                box.innerText = "¡Ay mi niño! Parece que el viento de la cumbre ha cortado la señal. ¿Revisamos la conexión?";
+                console.error("Error API:", e);
             }
         }
 
-        document.getElementById('btnEnviar').onclick = () => {
-            const val = document.getElementById('userInput').value.trim();
+        function handleSend() {
+            const input = document.getElementById('userInput');
+            const val = input.value.trim();
             if (val) {
-                preguntarSommelier(val);
-                document.getElementById('userInput').value = "";
+                preguntar(val);
+                input.value = "";
             }
-        };
+        }
 
         document.getElementById('userInput').onkeypress = (e) => {
-            if (e.key === 'Enter') document.getElementById('btnEnviar').click();
+            if (e.key === 'Enter') handleSend();
         };
     </script>
 </body>
