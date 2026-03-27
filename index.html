@@ -5,22 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hécate - Experiencia Sensorial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Lato', sans-serif; background-color: #f9f7f2; color: #2d2d2d; }
+        body { font-family: 'Lato', sans-serif; background-color: #fcfaf7; color: #2d2d2d; -webkit-font-smoothing: antialiased; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .wine-card { background: white; border-top: 6px solid #c5a059; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .beige-panel { background-color: #fdfbf7; border: 1px solid #f3ece0; border-radius: 1.5rem; }
-        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .history-text { line-height: 1.8; font-style: italic; color: #4a4a4a; }
-        .icon-circle { background: #f3ece0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #c5a059; flex-shrink: 0; }
+        
+        .wine-card { 
+            background: white; 
+            border-top: 1px solid #e5e7eb; 
+            box-shadow: 0 40px 80px -15px rgba(0,0,0,0.06); 
+        }
+
+        .beige-panel { 
+            background-color: #faf9f6; 
+            border: 1px solid #f1eee9; 
+            border-radius: 2rem; 
+        }
+
+        /* Rotación de la flecha en estado activo */
+        .pill-active svg {
+            transform: rotate(180deg);
+        }
+
+        .fade-in-panel { 
+            animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+        }
+
+        @keyframes slideDown { 
+            from { opacity: 0; transform: translateY(-10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .icon-box { 
+            background: #ffffff; 
+            width: 44px; height: 44px; 
+            display: flex; align-items: center; justify-content: center; 
+            border-radius: 50%; 
+            border: 1px solid #f1eee9;
+            flex-shrink: 0; 
+        }
     </style>
 </head>
-<body class="p-4 md:p-12 min-h-screen">
-    <div class="max-w-3xl mx-auto wine-card rounded-[2.5rem] overflow-hidden">
+<body class="p-6 md:p-20 min-h-screen flex items-center justify-center bg-[#f8f6f2]">
+    <div class="max-w-3xl w-full wine-card rounded-[4rem] overflow-hidden">
         
-        <!-- Cabecera -->
+        <!-- Cabecera Actualizada -->
         <header class="text-center pt-12 pb-8 px-8">
             <div class="mb-4">
                 <small class="text-[10px] tracking-[0.5em] text-gray-400 font-bold uppercase italic block">Vitis Fortunata</small>
@@ -29,104 +58,126 @@
             <p class="text-[#c5a059] uppercase tracking-[0.2em] italic text-sm font-light">Listán Blanco • Las Dehesas, Güímar</p>
         </header>
 
-        <div class="px-8 pb-12">
+        <div class="px-10 pb-28">
             
-            <!-- Sección: Historia Heroica -->
-            <section class="mb-10">
-                <div class="text-center mb-6">
-                    <button onclick="toggleHistoria()" class="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full hover:bg-black transition-all shadow-lg group">
-                        <span class="text-sm font-bold uppercase tracking-widest">La Historia de Hécate</span>
-                        <svg id="arrow" class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                </div>
+            <!-- 1. SECCIÓN: HISTORIA -->
+            <div class="text-center mb-10">
+                <button id="btn-historia" onclick="toggleSection('historia')" class="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full hover:bg-black transition-all shadow-lg group">
+                    <span class="text-sm font-bold uppercase tracking-widest">La Historia de Hécate</span>
+                    <svg id="arrow-historia" class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
 
-                <div id="historia-content" class="hidden fade-in beige-panel p-8 mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-[#1a1a1a] italic border-b border-amber-100 pb-2">Vendimia y Desafío Técnico</h3>
-                    <div class="history-text text-sm space-y-4">
+                <div id="content-historia" class="hidden fade-in-panel beige-panel p-12 mt-6 mb-8 mx-auto max-w-2xl text-center">
+                    <h3 class="text-2xl font-bold mb-8 text-[#1a1a1a] italic leading-tight">Vendimia Heroica y Desafío Técnico</h3>
+                    <div class="text-[14px] leading-relaxed text-gray-600 space-y-6 font-light">
                         <p>Hécate nace de una <strong>vendimia heroica</strong> en las escarpadas cumbres de Güímar, donde la altitud impone un esfuerzo físico extremo. Pero el verdadero reto comenzó en bodega: una fermentación en condiciones críticas, marcada por <strong>altas temperaturas y un elevado GAP</strong> (Grado Alcohólico Probable).</p>
                         <p>La levadura, al límite de su resistencia, sufrió una <strong>parada fermentativa</strong>. Tras una cuidadosa reactivación y refermentación, decidimos apostar por una <strong>crianza de 4 meses sobre lías</strong>. Esta técnica fue la clave para redondear el vino, domar su fuerza alcohólica y aportarle esa untuosidad que hoy define su carácter único.</p>
+
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Sección: Notas de Cata Detalladas -->
-            <section class="mb-12">
-                <h2 class="text-2xl font-bold mb-8 text-center text-gray-800">Notas de Cata</h2>
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Visual -->
-                    <div class="beige-panel p-6 flex items-start gap-5">
-                        <div class="icon-circle text-xl">👁️</div>
+            <!-- 2. SECCIÓN: NOTAS DE CATA -->
+            <div class="text-center mb-10">
+                <button id="btn-cata" onclick="toggleSection('cata')" class="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full hover:bg-black transition-all shadow-lg group">
+                    <span class="text-sm font-bold uppercase tracking-widest">Notas de Cata</span>
+                    <svg id="arrow-cata" class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+
+                <div id="content-cata" class="hidden fade-in-panel space-y-4 mt-6 mb-8 mx-auto max-w-2xl">
+
+                    <div class="beige-panel p-8 flex items-center gap-8 text-left">
+                        <div class="icon-box text-xl shadow-sm">👁️</div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Visual</h3>
-                            <p class="text-sm text-gray-600 italic">Amarillo pajizo pálido, extremadamente brillante, con reflejos acerados que denotan su frescura de altura.</p>
+                            <h3 class="text-[10px] font-bold uppercase tracking-widest text-amber-800 mb-1 italic">Fase Visual</h3>
+                            <p class="text-[13px] text-gray-500 font-light leading-relaxed italic">Amarillo pajizo pálido, extremadamente brillante, con reflejos acerados que denotan su frescura de altura.</p>
                         </div>
                     </div>
-                    <!-- Olfativa -->
-                    <div class="beige-panel p-6 flex items-start gap-5">
-                        <div class="icon-circle text-xl">👃</div>
+
+                    <div class="beige-panel p-8 flex items-center gap-8 text-left">
+                        <div class="icon-box text-xl shadow-sm">👃</div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Olfativa</h3>
-                            <p class="text-sm text-gray-600 italic">Intensa carga de fruta blanca madura. La crianza sobre lías emerge con notas sutiles de panadería y levadura sobre un fondo mineral volcánico.</p>
+                            <h3 class="text-[10px] font-bold uppercase tracking-widest text-amber-800 mb-1 italic">Fase Olfativa</h3>
+                            <p class="text-[13px] text-gray-500 font-light leading-relaxed italic">Intensa carga de fruta blanca. La crianza sobre lías emerge con notas sutiles de panadería y levadura sobre un fondo mineral volcánico.</p>
                         </div>
                     </div>
-                    <!-- Gustativa -->
-                    <div class="beige-panel p-6 flex items-start gap-5">
-                        <div class="icon-circle text-xl">👅</div>
+
+<div class="beige-panel p-8 flex items-center gap-8 text-left">
+                        <div class="icon-box text-xl shadow-sm">👅</div>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Gustativa</h3>
-                            <p class="text-sm text-gray-600 italic">Entrada envolvente y sedosa. El equilibrio entre el dulzor residual del semiseco y la acidez vibrante crea un paso por boca largo y salino.</p>
+                            <h3 class="text-[10px] font-bold uppercase tracking-widest text-amber-800 mb-1 italic">Fase Gustativa</h3>
+                            <p class="text-[13px] text-gray-500 font-light leading-relaxed italic">Entrada envolvente y sedosa. El equilibrio entre el dulzor residual del semiseco y la acidez vibrante crea un paso por boca largo y salino.</p>
                         </div>
                     </div>
+
                 </div>
-            </section>
+            </div>
 
-            <!-- Sección: Maridaje: Armonía de Sabores -->
-            <section>
-                <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">Maridaje</h2>
-                <p class="text-[10px] text-center uppercase tracking-[0.3em] text-amber-600 mb-8 italic">Armonía de Sabores</p>
-                
-                <div class="beige-panel p-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-6">
+            <!-- 3. SECCIÓN: MARIDAJE -->
+            <div class="text-center mb-6">
+                <button id="btn-maridaje" onclick="toggleSection('maridaje')" class="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full hover:bg-black transition-all shadow-lg group">
+                    <span class="text-sm font-bold uppercase tracking-widest">Maridaje y Armonía</span>
+                    <svg id="arrow-maridaje" class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+
+                <div id="content-maridaje" class="hidden fade-in-panel beige-panel p-12 mt-6 mb-8 mx-auto max-w-2xl text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="space-y-8 flex flex-col items-center md:items-start">
+
                             <div class="flex items-center gap-4">
-                                <span class="text-3xl">🧀</span>
+                                <span class="text-4xl filter drop-shadow-md">🧀</span>
                                 <span class="text-sm font-bold text-gray-700 italic">Queso de cabra canario</span>
                             </div>
+
                             <div class="flex items-center gap-4">
-                                <span class="text-3xl">🍑</span>
+                                <span class="text-4xl filter drop-shadow-md"">🍑</span>
                                 <span class="text-sm font-bold text-gray-700 italic">Orejones e higos pasados herreños</span>
                             </div>
+
                             <div class="flex items-center gap-4">
-                                <span class="text-3xl">🌰</span>
-                                <span class="text-sm font-bold text-gray-700 italic">Almendras fritas y nueces</span>
+                                <span class="text-4xl filter drop-shadow-md">🌰</span>
+                                <span class="text-sm font-bold text-gray-700 italic">Frutos secos</span>
                             </div>
                         </div>
-                        <div class="border-l border-amber-100 pl-6 flex flex-col justify-center">
-                            <h4 class="text-xs font-bold uppercase mb-3 text-amber-800 italic">¿Por qué esta selección?</h4>
+
+                        <div class="md:border-l border-amber-100 md:pl-10 flex flex-col justify-center text-center md:text-left">
+                            <h4 class="text-xs font-bold uppercase mb-3 text-amber-600 italic">¿Por qué esta selección?</h4>
                             <p class="text-xs text-gray-600 leading-relaxed italic">
                                 Buscamos una <strong>armonía por contraste y afinidad</strong>. La salinidad del queso y las almendras potencia la fruta fresca del vino. Los higos y orejones abrazan el azúcar residual del semiseco, mientras que los frutos secos resaltan la estructura y el volumen ganado durante la crianza sobre lías.
                             </p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
         </div>
 
-        <footer class="pb-12 text-center opacity-30">
-            <p class="text-[9px] font-bold uppercase tracking-[0.6em] text-gray-500 italic">Vitis Fortunata • Patrimonio Líquido</p>
+        <footer class="pb-20 text-center">
+            <div class="inline-block h-[1px] w-24 bg-amber-100/50 mb-8"></div>
+            <p class="text-[9px] font-bold uppercase tracking-[0.9em] text-gray-300 italic">Patrimonio Líquido • Tenerife</p>
         </footer>
     </div>
 
     <script>
-        function toggleHistoria() {
-            const content = document.getElementById('historia-content');
-            const arrow = document.getElementById('arrow');
-            if (content.classList.contains('hidden')) {
+        function toggleSection(id) {
+            const content = document.getElementById(`content-${id}`);
+            const btn = document.getElementById(`btn-${id}`);
+            
+            const isHidden = content.classList.contains('hidden');
+
+            // Resetear estados: cerramos todos para que sea un acordeón
+            document.querySelectorAll('[id^="content-"]').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('[id^="btn-"]').forEach(b => b.classList.remove('pill-active'));
+
+            if (isHidden) {
                 content.classList.remove('hidden');
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                arrow.style.transform = 'rotate(0deg)';
+                btn.classList.add('pill-active');
             }
         }
     </script>
