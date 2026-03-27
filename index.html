@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hécate - Sommelier Virtual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Lato', sans-serif; background-color: #fcfaf7; color: #2d2d2d; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .wine-card { background: white; border-top: 8px solid #c5a059; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        .loading-dots:after { content: '.'; animation: dots 1.5s infinite; }
+        @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } }
+        .section-title { position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 40px; height: 2px; background: #c5a059; }
+        .cata-detail { border-left: 2px solid #f3f0ea; padding-left: 1rem; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body class="p-4 md:p-8 bg-[#f8f5f0] min-h-screen">
+    <div class="max-w-2xl mx-auto wine-card rounded-3xl overflow-hidden">
+        
+        <!-- ENCABEZADO -->
+        <header class="text-center pt-10 pb-6 px-8">
+            <div class="mb-3 opacity-80">
+                <small class="text-[10px] tracking-[0.4em] text-gray-400 font-bold uppercase italic">Vitis Fortunata</small>
+            </div>
+            <h1 class="text-5xl font-bold text-[#1a1a1a]">HÉCATE</h1>
+            <p class="text-[#c5a059] uppercase tracking-widest mt-2 italic text-sm">Listán Blanco • Selección de Altura</p>
+        </header>
+
+        <div class="px-8 pb-10">
+            <!-- RESUMEN DE CATA RÁPIDO -->
+            <div class="grid grid-cols-3 gap-2 mb-10 text-center border-y border-gray-100 py-6">
+                <div>
+                    <span class="block text-[10px] uppercase tracking-tighter text-gray-400 font-bold mb-1">Vista</span>
+                    <span class="text-xs italic text-gray-600 font-medium">Limpio y brillante</span>
+                </div>
+                <div class="border-x border-gray-100">
+                    <span class="block text-[10px] uppercase tracking-tighter text-gray-400 font-bold mb-1">Nariz</span>
+                    <span class="text-xs italic text-gray-600 font-medium">Fruta y volcán</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-tighter text-gray-400 font-bold mb-1">Boca</span>
+                    <span class="text-xs italic text-gray-600 font-medium">Sedoso y equilibrado</span>
+                </div>
+            </div>
+
+            <!-- BLOQUE DE INTERACCIÓN (SOMMELIER) -->
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-6 section-title text-gray-800 italic">Conversa con el Sommelier</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                    <button onclick="preguntar('historia')" class="text-left p-4 rounded-xl border border-gray-100 bg-white hover:bg-amber-50 transition-all group shadow-sm">
+                        <span class="block text-[9px] font-bold text-amber-600 uppercase mb-1 tracking-tighter">La Vendimia ✨</span>
+                        <span class="text-sm font-medium italic group-hover:text-amber-900 leading-tight">¿Cuál es el origen de Hécate?</span>
+                    </button>
+                    <button onclick="preguntar('maridaje')" class="text-left p-4 rounded-xl border border-gray-100 bg-white hover:bg-amber-50 transition-all group shadow-sm">
+                        <span class="block text-[9px] font-bold text-amber-600 uppercase mb-1 tracking-tighter">Tu Propuesta ✨</span>
+                        <span class="text-sm font-medium italic group-hover:text-amber-900 leading-tight">¿Con qué lo bebemos hoy?</span>
+                    </button>
+                </div>
+
+                <div id="box" class="hidden mb-6 p-6 bg-amber-50/50 rounded-2xl border border-amber-100 relative text-center">
+                    <button onclick="document.getElementById('box').classList.add('hidden')" class="absolute top-2 right-4 text-amber-300 hover:text-amber-600 text-xl">&times;</button>
+                    <div id="loading" class="text-[10px] font-black text-amber-700 loading-dots mb-3 tracking-widest uppercase italic">Inspirando el aroma...</div>
+                    <div id="texto" class="text-base leading-relaxed text-amber-950 italic font-medium"></div>
+                    <div id="debug" class="hidden mt-4 pt-2 border-t border-amber-200 text-[9px] text-amber-400 font-mono"></div>
+                </div>
+
+                <div class="relative group">
+                    <input type="text" id="query" 
+                        class="w-full p-4 pr-12 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-200 bg-white text-sm" 
+                        placeholder="Pregúntame lo que quieras, mi niño..."
+                        onkeypress="if(event.key === 'Enter') preguntar(this.value)">
+                    <button onclick="preguntar(document.getElementById('query').value)" 
+                        class="absolute right-3 top-3 bg-[#1a1a1a] text-white p-2 rounded-lg hover:bg-black transition-all shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- NOTAS DE CATA DETALLADAS -->
+            <div class="mb-12">
+                <h2 class="text-xl font-bold mb-8 section-title text-gray-800 italic">Notas de Cata</h2>
+                
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Visual</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Presenta un color amarillo pajizo pálido con reflejos verdosos, muy limpio y brillante, que denota su frescura y juventud a pesar de su paso por lías.</p>
+                </div>
+
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Olfativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">En nariz destaca por su intensidad y elegancia. Notas de fruta blanca madura (pera, manzana) se mezclan con sutiles matices herbáceos y un fondo mineral volcánico muy característico. Los 4 meses de lías aportan una cremosidad aromática que recuerda a la bollería fina.</p>
+                </div>
+
+                <div class="cata-detail">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">Fase Gustativa</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">Entrada amable y golosa gracias a su carácter semiseco. En boca es amplio, sedoso y con un volumen notable fruto de su crianza. El equilibrio entre el dulzor residual y la acidez vibrante es perfecto, dejando un postgusto largo, salino y muy refrescante.</p>
+                </div>
+            </div>
+
+            <!-- MARIDAJE ELEGIDO -->
+            <div class="bg-[#fcfaf7] p-8 rounded-3xl border border-gray-100 shadow-sm">
+                <h2 class="text-lg font-bold mb-6 section-title text-gray-800">Sugerencia de la Casa</h2>
+                <div class="flex items-start gap-5">
+                    <div class="text-4xl">🍇</div>
+                    <div>
+                        <p class="text-sm font-bold text-gray-800 mb-2">Armonía Canaria</p>
+                        <p class="text-sm text-gray-600 leading-relaxed italic">
+                            Disfrútalo con un buen **queso de cabra canario** de media curación. Acompáñalo con **higos pasados**, **orejones**, **almendras tostadas** y **nueces**. 
+                            <span class="block mt-2 text-amber-800 font-medium">¿Por qué funciona?</span>
+                            La salinidad volcánica de Hécate corta la grasa del queso, mientras que los frutos secos y deshidratados potencian la sedosidad que las lías han dejado en el vino.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pb-10 text-center opacity-30">
+            <p class="text-[9px] font-bold uppercase tracking-[0.6em] text-gray-500 italic">Vitis Fortunata • Tenerife • Islas Canarias</p>
+        </footer>
+    </div>
+
+    <script>
+        const API_KEY = "AIzaSyD50vJbuEwYrsmwjydlaBCP2_PTFItmb7o".trim();
+        let MODELO_DETECTADO = null;
+
+        const RESPUESTAS_RESERVA = {
+            "historia": "Hécate nació de una vendimia heroica en las cumbres de Tenerife bajo el sol de octubre. Es un Listán Blanco que reposó 4 meses sobre sus lías para darte esa alma volcánica y sedosa que sientes hoy, mi niño.",
+            "maridaje": "Tu elección de queso de cabra con higos, orejones, almendras y nueces es magistral. La nuez aporta ese toque terroso que baila con la mineralidad de Hécate, mientras que los orejones resaltan la fruta blanca del Listán. ¡Puro gozo!",
+            "default": "¡Ay mi niño! El viento de la cumbre ha cortado la señal, pero este Hécate es pura magia volcánica. Un Listán Blanco semiseco con alma de lías que te va a encantar. ¡Prueba de nuevo en un minuto!"
+        };
+
+        async function descubrirModelo() {
+            try {
+                const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+                const data = await resp.json();
+                if (data.models) {
+                    const found = data.models.find(m => 
+                        m.name.includes('gemini-1.5-flash') || 
+                        m.name.includes('gemini-1.0-pro') ||
+                        (m.supportedGenerationMethods && m.supportedGenerationMethods.includes('generateContent'))
+                    );
+                    if (found) MODELO_DETECTADO = found.name;
+                }
+            } catch (e) { console.error("Error al buscar modelo:", e); }
+        }
+
+        async function preguntar(p) {
+            if(!p || p.trim() === "") return;
+            const box = document.getElementById('box');
+            const texto = document.getElementById('texto');
+            const loading = document.getElementById('loading');
+            const debug = document.getElementById('debug');
+            const input = document.getElementById('query');
+            
+            box.classList.remove('hidden');
+            loading.classList.remove('hidden');
+            debug.classList.add('hidden');
+            texto.innerText = "";
+            const queryOriginal = p.toLowerCase();
+            input.value = "";
+
+            if (!MODELO_DETECTADO) await descubrirModelo();
+            const modeloFinal = MODELO_DETECTADO || "models/gemini-1.5-flash";
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/${modeloFinal}:generateContent?key=${API_KEY}`;
+                const resp = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `CONTEXTO: Eres un sommelier canario amable. Hablas de Hécate (Listán Blanco, semiseco, 4 meses lías, Tenerife). El maridaje ideal propuesto por el usuario es queso de cabra canario, higos pasados, almendras, orejones y nueces. Responde breve y poético usando 'mi niño'. Pregunta: ${p}` }] }]
+                    })
+                });
+                const data = await resp.json();
+                if (data.candidates && data.candidates[0].content) {
+                    loading.classList.add('hidden');
+                    texto.innerText = data.candidates[0].content.parts[0].text;
+                } else { throw new Error("Fallo en respuesta"); }
+            } catch (e) {
+                loading.classList.add('hidden');
+                if (queryOriginal.includes("historia")) texto.innerText = RESPUESTAS_RESERVA.historia;
+                else if (queryOriginal.includes("maridaje")) texto.innerText = RESPUESTAS_RESERVA.maridaje;
+                else texto.innerText = RESPUESTAS_RESERVA.default;
+                debug.innerText = "Info técnica: " + e.message;
+                debug.classList.remove('hidden');
+            }
+        }
+        window.onload = descubrirModelo;
+    </script>
+</body>
+</html>
