@@ -3,257 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hécate - Sommelier Virtual</title>
+    <title>Hécate - Experiencia Sensorial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Lato', sans-serif; background-color: #fdfbf8; color: #2d2d2d; }
+        body { font-family: 'Lato', sans-serif; background-color: #f9f7f2; color: #2d2d2d; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        
-        .main-container {
-            max-width: 450px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 4rem;
-            box-shadow: 0 10px 60px rgba(0,0,0,0.03);
-            min-height: 100vh;
-        }
-
-        .section-card {
-            background-color: #fefcf9;
-            border-radius: 2rem;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .label-style {
-            font-size: 0.65rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #d4a373;
-            font-style: italic;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        .content-style {
-            font-size: 0.95rem;
-            color: #4a4a4a;
-            font-style: italic;
-            line-height: 1.6;
-        }
-
-        .harmony-box {
-            background-color: #fefcf9;
-            border-radius: 3rem;
-            padding: 2.5rem;
-            position: relative;
-            margin-top: 3rem;
-        }
-
-        .grape-icon {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 4rem;
-            opacity: 0.1;
-            transform: rotate(15deg);
-        }
-
-        .title-underline {
-            position: relative;
-            display: inline-block;
-        }
-
-        .title-underline::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: #d4a373;
-        }
-
-        /* Estilos del Chat */
-        .chat-response {
-            background: #fff9f2;
-            border: 1px solid #f3e9dc;
-            border-radius: 1.5rem;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            font-style: italic;
-            color: #5d4037;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        .loading-dots:after {
-            content: '.';
-            animation: dots 1.5s infinite;
-        }
-        @keyframes dots { 0%, 20% { content: '.'; } 40% { content: '..'; } 60% { content: '...'; } }
+        .wine-card { background: white; border-top: 6px solid #c5a059; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        .beige-panel { background-color: #fdfbf7; border: 1px solid #f3ece0; border-radius: 1.5rem; }
+        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .history-text { line-height: 1.8; font-style: italic; color: #4a4a4a; }
+        .icon-circle { background: #f3ece0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #c5a059; flex-shrink: 0; }
     </style>
 </head>
-<body class="bg-[#f8f5f0] py-10 px-4">
-
-    <div class="main-container overflow-hidden pb-20">
+<body class="p-4 md:p-12 min-h-screen">
+    <div class="max-w-3xl mx-auto wine-card rounded-[2.5rem] overflow-hidden">
         
-        <!-- HEADER SEGÚN CAPTURA -->
-        <header class="text-center pt-20 pb-16 px-10">
-            <p class="text-[10px] tracking-[0.5em] text-gray-400 font-bold uppercase mb-4 italic">Vitis Fortunata</p>
-            <h1 class="text-6xl font-bold tracking-tighter mb-2">HÉCATE</h1>
-            <p class="text-[#d4a373] text-[11px] font-black tracking-[0.3em] uppercase italic underline decoration-amber-100 underline-offset-8">Listán Blanco • Las Dehesas 2025</p>
+        <!-- Cabecera -->
+        <header class="text-center pt-12 pb-8 px-8">
+            <div class="mb-4">
+                <small class="text-[10px] tracking-[0.5em] text-gray-400 font-bold uppercase italic block">Vitis Fortunata</small>
+            </div>
+            <h1 class="text-6xl font-bold text-[#1a1a1a] mb-2">HÉCATE</h1>
+            <p class="text-[#c5a059] uppercase tracking-[0.2em] italic text-sm font-light">Listán Blanco • Las Dehesas, Güímar</p>
         </header>
 
-        <div class="px-8">
+        <div class="px-8 pb-12">
             
-            <!-- CONVERSA CON EL SOMMELIER -->
-            <section class="mb-16">
-                <div class="flex justify-between items-end mb-6">
-                    <h2 class="text-2xl font-bold italic title-underline">Conversa con el Sommelier</h2>
-                    <button onclick="preguntar('Háblame de la vinificación de Hécate')" class="text-[9px] font-black text-[#d4a373] uppercase tracking-widest border-b border-amber-100 pb-1 hover:text-amber-800 transition-colors">Vinificación</button>
-                </div>
-
-                <div id="chatDisplay" class="hidden">
-                    <div id="loading" class="text-center mb-4">
-                        <span class="text-[9px] font-black uppercase tracking-widest text-amber-600 loading-dots italic">Inspirando aroma</span>
-                    </div>
-                    <div id="responseBox" class="chat-response"></div>
-                </div>
-
-                <div class="relative">
-                    <input type="text" id="userInput" 
-                        class="w-full bg-[#fefcf9] p-4 pr-14 rounded-2xl outline-none text-sm italic border border-transparent focus:border-amber-100 shadow-inner" 
-                        placeholder="Pregúntame, mi niña...">
-                    <button id="btnEnviar" class="absolute right-2 top-2 bg-[#1a1a1a] text-white p-2.5 rounded-xl hover:bg-black transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+            <!-- Sección: Historia Heroica -->
+            <section class="mb-10">
+                <div class="text-center mb-6">
+                    <button onclick="toggleHistoria()" class="inline-flex items-center gap-3 bg-[#1a1a1a] text-white px-8 py-4 rounded-full hover:bg-black transition-all shadow-lg group">
+                        <span class="text-sm font-bold uppercase tracking-widest">La Historia de Hécate</span>
+                        <svg id="arrow" class="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                 </div>
-            </section>
 
-            <!-- NOTAS DE CATA -->
-            <section class="mb-16">
-                <h2 class="text-2xl font-bold italic title-underline mb-10">Notas de Cata</h2>
-                
-                <div class="section-card">
-                    <span class="label-style">Fase Visual</span>
-                    <p class="content-style">Amarillo pajizo brillante, reflejos acerados. Limpio y cristalino.</p>
-                </div>
-
-                <div class="section-card">
-                    <span class="label-style">Fase Olfativa</span>
-                    <p class="content-style">Fruta blanca madura sobre un elegante fondo de lías finas y mineralidad volcánica.</p>
-                </div>
-
-                <div class="section-card">
-                    <span class="label-style">Fase Gustativa</span>
-                    <p class="content-style">Entrada golosa, paso sedoso y equilibrado. Postgusto largo con salinidad volcánica.</p>
+                <div id="historia-content" class="hidden fade-in beige-panel p-8 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-[#1a1a1a] italic border-b border-amber-100 pb-2">Vendimia y Desafío Técnico</h3>
+                    <div class="history-text text-sm space-y-4">
+                        <p>Hécate nace de una <strong>vendimia heroica</strong> en las escarpadas cumbres de Güímar, donde la altitud impone un esfuerzo físico extremo. Pero el verdadero reto comenzó en bodega: una fermentación en condiciones críticas, marcada por <strong>altas temperaturas y un elevado GAP</strong> (Grado Alcohólico Probable).</p>
+                        <p>La levadura, al límite de su resistencia, sufrió una <strong>parada fermentativa</strong>. Tras una cuidadosa reactivación y refermentación, decidimos apostar por una <strong>crianza de 4 meses sobre lías</strong>. Esta técnica fue la clave para redondear el vino, domar su fuerza alcohólica y aportarle esa untuosidad que hoy define su carácter único.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- ARMONÍA DE SABORES -->
-            <section class="harmony-box">
-                <div class="grape-icon">🍇</div>
-                <h2 class="text-2xl font-bold italic title-underline mb-12">Armonía de Sabores</h2>
-                
-                <div class="space-y-10">
-                    <div class="flex items-start gap-4">
-                        <span class="text-3xl mt-1">🧀</span>
+            <!-- Sección: Notas de Cata Detalladas -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-8 text-center text-gray-800">Notas de Cata</h2>
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Visual -->
+                    <div class="beige-panel p-6 flex items-start gap-5">
+                        <div class="icon-circle text-xl">👁️</div>
                         <div>
-                            <h4 class="text-[13px] font-bold italic text-gray-800 mb-1">Queso de Cabra Canario</h4>
-                            <p class="text-[12px] text-gray-500 italic leading-relaxed">De media curación, su acidez láctica se funde con el punto semiseco del vino.</p>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Visual</h3>
+                            <p class="text-sm text-gray-600 italic">Amarillo pajizo pálido, extremadamente brillante, con reflejos acerados que denotan su frescura de altura.</p>
                         </div>
                     </div>
-
-                    <div class="flex items-start gap-4">
-                        <span class="text-3xl mt-1">🌰</span>
+                    <!-- Olfativa -->
+                    <div class="beige-panel p-6 flex items-start gap-5">
+                        <div class="icon-circle text-xl">👃</div>
                         <div>
-                            <h4 class="text-[13px] font-bold italic text-gray-800 mb-1">Frutos Secos y Desecados</h4>
-                            <p class="text-[12px] text-gray-500 italic leading-relaxed">Almendras tostadas, nueces, higos pasados y orejones. Potencian la untuosidad de las lías.</p>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Olfativa</h3>
+                            <p class="text-sm text-gray-600 italic">Intensa carga de fruta blanca madura. La crianza sobre lías emerge con notas sutiles de panadería y levadura sobre un fondo mineral volcánico.</p>
+                        </div>
+                    </div>
+                    <!-- Gustativa -->
+                    <div class="beige-panel p-6 flex items-start gap-5">
+                        <div class="icon-circle text-xl">👅</div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-amber-700 mb-1 italic">Fase Gustativa</h3>
+                            <p class="text-sm text-gray-600 italic">Entrada envolvente y sedosa. El equilibrio entre el dulzor residual del semiseco y la acidez vibrante crea un paso por boca largo y salino.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-12 pt-8 border-t border-amber-100/40 text-center">
-                    <p class="text-[12px] text-[#8b5e34] italic leading-relaxed px-2 font-medium">
-                        "La acidez de Hécate limpia el paladar, mientras que el azúcar residual abraza el dulzor natural del higo."
-                    </p>
-                </div>
             </section>
 
+            <!-- Sección: Maridaje: Armonía de Sabores -->
+            <section>
+                <h2 class="text-2xl font-bold mb-2 text-center text-gray-800">Maridaje</h2>
+                <p class="text-[10px] text-center uppercase tracking-[0.3em] text-amber-600 mb-8 italic">Armonía de Sabores</p>
+                
+                <div class="beige-panel p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="text-3xl">🧀</span>
+                                <span class="text-sm font-bold text-gray-700 italic">Queso de cabra canario</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-3xl">🍑</span>
+                                <span class="text-sm font-bold text-gray-700 italic">Orejones e higos pasados herreños</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-3xl">🌰</span>
+                                <span class="text-sm font-bold text-gray-700 italic">Almendras fritas y nueces</span>
+                            </div>
+                        </div>
+                        <div class="border-l border-amber-100 pl-6 flex flex-col justify-center">
+                            <h4 class="text-xs font-bold uppercase mb-3 text-amber-800 italic">¿Por qué esta selección?</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed italic">
+                                Buscamos una <strong>armonía por contraste y afinidad</strong>. La salinidad del queso y las almendras potencia la fruta fresca del vino. Los higos y orejones abrazan el azúcar residual del semiseco, mientras que los frutos secos resaltan la estructura y el volumen ganado durante la crianza sobre lías.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <footer class="mt-20 text-center pb-10">
-            <p class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">Valle de Güímar • Tenerife • Vitis Fortunata</p>
+        <footer class="pb-12 text-center opacity-30">
+            <p class="text-[9px] font-bold uppercase tracking-[0.6em] text-gray-500 italic">Vitis Fortunata • Patrimonio Líquido</p>
         </footer>
     </div>
 
     <script>
-        // Clave API ensamblada para evitar errores de parseo
-        const k_1 = "AIzaSyBgQPoHyBE";
-        const k_2 = "Bwe0JyWWHX6i6N";
-        const k_3 = "7fyW_q30U4";
-        const getApiKey = () => k_1 + k_2 + k_3;
-
-        async function preguntar(q) {
-            const display = document.getElementById('chatDisplay');
-            const box = document.getElementById('responseBox');
-            const loading = document.getElementById('loading');
-            
-            display.classList.remove('hidden');
-            loading.classList.remove('hidden');
-            box.innerText = "";
-
-            try {
-                const apiKey = getApiKey();
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ 
-                            parts: [{ 
-                                text: `Eres un sommelier experto de Tenerife (hombre). Hablas sobre el vino Hécate (Listán Blanco 2025, semiseco, Las Dehesas, 4 meses lías). Tu tono es elegante, docto y muy amable. Dirígete siempre a la usuaria como 'mi niña'. Responde de forma poética y muy breve (máximo dos frases). Pregunta del usuario: ${q}` 
-                            }] 
-                        }]
-                    })
-                });
-
-                if (!response.ok) throw new Error('Error en la comunicación');
-
-                const data = await response.json();
-                loading.classList.add('hidden');
-                
-                if (data.candidates && data.candidates[0].content) {
-                    const respuesta = data.candidates[0].content.parts[0].text;
-                    box.innerText = respuesta;
-                } else {
-                    box.innerText = "¡Ay mi niña! El aroma de este Listán es tan intenso que me ha dejado sin palabras. Prueba a preguntarme otra vez.";
-                }
-            } catch (e) {
-                loading.classList.add('hidden');
-                box.innerText = "¡Ay mi niña! Parece que el viento de la cumbre ha movido las antenas. Inténtalo de nuevo, que el vino espera.";
-                console.error("Error:", e);
+        function toggleHistoria() {
+            const content = document.getElementById('historia-content');
+            const arrow = document.getElementById('arrow');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
             }
         }
-
-        function handleSend() {
-            const input = document.getElementById('userInput');
-            const val = input.value.trim();
-            if (val) {
-                preguntar(val);
-                input.value = "";
-            }
-        }
-
-        document.getElementById('btnEnviar').addEventListener('click', handleSend);
-        
-        document.getElementById('userInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSend();
-        });
     </script>
 </body>
 </html>
